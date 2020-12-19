@@ -1,14 +1,14 @@
-import { render } from '@testing-library/react'
 import React, { useContext } from 'react'
 import AppContext from './AppContext'
+import PropTypes from 'prop-types';
 
 function NoteNav(props) {
     const context = useContext(AppContext)
     const note = props.note || context.notes.find(
-        (item) => props.match && item.id == props.match.params.noteId
+        (item) => props.match && item.id === props.match.params.noteId
       ) || {}
       const folder = context.folders.find(
-          (item) => item.id == note.folderId
+          (item) => item.id === note.folderId
       ) || {}
         return (
             <div>
@@ -19,6 +19,11 @@ function NoteNav(props) {
             </div>
         )
 
+}
+
+NoteNav.propTypes = {
+    match: PropTypes.any,
+    history: PropTypes.any
 }
 
 export default NoteNav

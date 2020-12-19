@@ -1,18 +1,16 @@
 import React, { useContext } from 'react'
 import Folder from './Folder'
 import AppContext from './AppContext'
+import { Link } from 'react-router-dom';
 
-function FolderList(props) {
+function FolderList() {
     const context = useContext(AppContext)
   return (
     <div>
-      <p>
         {context.folders.map((item) => (
-          <Folder name={item.name} id={item.id} />
+          <Folder name={item.name} id={item.id} key={item.id} />
         ))}
-      </p>
-      <button>Add Folder</button>
-      <button>Delete Folder</button>
+      <Link to='/addfolder'>Add Folder</Link>
     </div>
   );
 }

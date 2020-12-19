@@ -1,12 +1,13 @@
-import { render } from '@testing-library/react';
 import React, { useContext } from 'react';
 import Note from './Note';
 import AppContext from './AppContext'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function NoteList(props) {
   const context = useContext(AppContext)
   const notes = context.notes.filter(
-    (item) => item.folderId == props.match.params.folderId || !props.match.params.folderId
+    (item) => item.folderId === props.match.params.folderId || !props.match.params.folderId
   )
 
   return (
@@ -14,13 +15,18 @@ function NoteList(props) {
       {notes.map((item) => (
         <Note
           note={item}
+          key={item.id}
         />
       ))}
-      <button>Add Note</button>
+      <Link to='/addnote'>Add Note</Link>
 
-      <p></p>
     </div>
   );
+}
+
+NoteList.propTypes = {
+  match: PropTypes.any,
+  name: PropTypes.string
 }
 
 export default NoteList;

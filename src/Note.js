@@ -1,12 +1,12 @@
-import { render } from '@testing-library/react';
 import React, { useContext } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AppContext from './AppContext'
+import PropTypes from 'prop-types';
 
 function Note(props) {
   const context = useContext(AppContext)
   const note = props.note || context.notes.find(
-    (item) => props.match && item.id == props.match.params.noteId
+    (item) => props.match && item.id === props.match.params.noteId
   ) || {}
   return (
     <div>
@@ -27,6 +27,11 @@ function Note(props) {
       >Delete Note</button>
     </div>
   );
+}
+
+Note.propTypes = {
+  match: PropTypes.any,
+  history: PropTypes.any
 }
 
 export default Note;
